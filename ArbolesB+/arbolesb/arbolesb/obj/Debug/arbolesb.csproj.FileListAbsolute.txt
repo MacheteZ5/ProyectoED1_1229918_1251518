@@ -1,0 +1,5 @@
+C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ArbolesB+\arbolesb\arbolesb\bin\Debug\arbolesb.dll
+C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ArbolesB+\arbolesb\arbolesb\bin\Debug\arbolesb.pdb
+C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ArbolesB+\arbolesb\arbolesb\obj\Debug\arbolesb.csproj.CoreCompileInputs.cache
+C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ArbolesB+\arbolesb\arbolesb\obj\Debug\arbolesb.dll
+C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ArbolesB+\arbolesb\arbolesb\obj\Debug\arbolesb.pdb

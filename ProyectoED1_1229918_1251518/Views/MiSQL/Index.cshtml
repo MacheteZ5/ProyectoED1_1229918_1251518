@@ -1,0 +1,73 @@
+﻿
+@using ProyectoED1_1229918_1251518.Models;
+@model IEnumerable<Diccionario>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<style>
+
+    #archivo {
+        background-color: #003366;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    h1 {
+        color: white;
+        font-weight: bold;
+    }
+
+    #cambio {
+        background-color: #663300;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #Diccionario {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 30em;
+        height: 18em;
+        margin-top: -9em;
+        margin-left: -15em;
+    }
+
+    body {
+        background-image: url(https://downloadwallpaper.org/wp-content/uploads/2016/11/cool-wallpaper-backgrounds-HD7.jpg);
+    }
+</style>
+<body>
+    <div id="titulo">
+        <center>
+            <h1>Por favor, seleccione el archivo del diccionario que será utilizado</h1>
+        </center>
+    </div>
+    <div id="Diccionario">
+        <center>
+            @using (Html.BeginForm("Index", "MiSQL", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <input id="archivo" type="file" name="postedFile" />
+                <input id="archivo" type="submit" value="Cargar Archivo" />
+            }
+            <form action="MiSQL/Menú" method="post">
+                <input id="cambio" type="submit" name="enviar" value="Dirigirse al Menú" />
+            </form>
+        </center>
+    </div>
+</body>
+</html>

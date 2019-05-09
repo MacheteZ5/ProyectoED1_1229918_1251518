@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Menú";
+}
+<style>
+
+    #boton {
+        background-color: #003366;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    h1 {
+        color: white;
+        font-weight: bold;
+    }
+
+    #cambio {
+        background-color: #663300;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    #botones {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        width: 30em;
+        height: 18em;
+        margin-top: -9em;
+        margin-left: -15em;
+    }
+
+    body {
+        background-image: url(https://downloadwallpaper.org/wp-content/uploads/2016/11/cool-wallpaper-backgrounds-HD7.jpg);
+    }
+</style>
+<center>
+    <h1>Por favor, presione el boton correspondiente a la acción que desea</h1>
+    <div id="botones">
+        <form action="CreaciónTabla" method="post">
+            <input type="submit" id="boton" name="enviar" value="Creación de Tabla" />
+        </form>
+        <br />
+        <form action="CambioValor" method="post">
+            <input type="submit" id="boton" name="enviar" value="Cambiar valor" />
+        </form>
+        <br />
+        <form action="InserciónDatos" method="post">
+            <input type="submit" id="boton" name="enviar" value="Ir inserción de valores en tabla" />
+        </form>
+        <br />
+        <form action="Eliminación" method="post">
+            <input type="submit" id="boton" name="enviar" value="Eliminar" />
+        </form>
+    </div>
+</center>

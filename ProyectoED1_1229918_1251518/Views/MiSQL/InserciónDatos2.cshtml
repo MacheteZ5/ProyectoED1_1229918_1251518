@@ -1,0 +1,131 @@
+﻿
+@model IEnumerable<ProyectoED1_1229918_1251518.Models.Información>
+@{
+    ViewBag.Title = "InserciónDeDatos";
+}
+<style>
+
+    #boton {
+        background-color: #003366;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    h1 {
+        color: white;
+        font-weight: bold;
+    }
+
+    body {
+        background-image: url(https://downloadwallpaper.org/wp-content/uploads/2016/11/cool-wallpaper-backgrounds-HD7.jpg);
+    }
+
+    table {
+        border: 1px solid #ccc;
+        border-collapse: collapse;
+        background-color: #fff;
+        text-align: center;
+    }
+
+        table th {
+            background-color: #003366;
+            color: #fff;
+            font-weight: bold;
+            font-size: 12pt;
+            border: 1px solid #000;
+        }
+
+        table td {
+            background-color: #50778f;
+            padding: 5px;
+            border: 1px solid #000;
+        }
+
+        table, table table td {
+            border: 0px solid #000;
+        }
+</style>
+<h1>Inserción de Datos</h1>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="paleBlueRows">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.num)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.varchar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tiempo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.num2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.varchar2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tiempo2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.num3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.varchar3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tiempo3)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.num)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.varchar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tiempo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.num2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.varchar2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tiempo2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.num3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.varchar3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tiempo3)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<br />
+<form action="Menú" method="post">
+    <input id="boton" type="submit" name="enviar" value="Retornar al Menú" />
+</form>

@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "cambiodevalor";
+}
+<style>
+
+    #texto {
+        border: 1px solid white;
+        background: #50778f;
+        color: white;
+        padding: 10px;
+        font-size: larger;
+    }
+
+    #boton {
+        background-color: #003366;
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-decoration: none;
+        margin: 4px 2px;
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    h1, h3 {
+        color: white;
+        font-weight: bold;
+    }
+
+    body {
+        background-image: url(https://downloadwallpaper.org/wp-content/uploads/2016/11/cool-wallpaper-backgrounds-HD7.jpg);
+    }
+</style>
+<script>
+    function goBack() {
+        window.history.back();
+    }
+    document.addEventListener('DOMContentLoaded', function () {
+        if (!Notification) {
+            alert('Desktop notifications not available in your browser. Try Chromium.');
+            return;
+        }
+
+        if (Notification.permission !== "granted")
+            Notification.requestPermission();
+    });
+
+    function notificar() {
+        if (Notification.permission !== "granted")
+            Notification.requestPermission();
+        else {
+            var notification = new Notification('AVISO SOBRE MODIFICACION', {
+                icon: 'data:image/png;base64,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',
+                body: "La modificación se realizó exitosamente.",
+            });
+
+            
+        }
+    }
+</script>
+<br / >
+<center>
+    <h1>Introduzca los valores que desea cambiar en el diccionario</h1>
+    <form id="modificar" action="CambioValor2" method="post">
+        <label> <h3>Clave:</h3> <input id="texto" type="text" name="clave" value="" / > </label> <br / >
+        <br / >
+        <label> <h3>Valor:</h3> <input id="texto" type="text" name="valor" value="" / > </label> <br / >
+        <button id="boton" onclick="notificar()">Modificar</button>
+
+        <br / >
+    </form>
+    <button id="boton" onclick="goBack()">Volver</button>
+</center>
