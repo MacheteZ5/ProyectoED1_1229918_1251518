@@ -1251,6 +1251,7 @@ return RedirectToAction("CreaciónTabla");
                                 int q = 0;
                                 foreach(Información t in lista)
                                 {
+                                    ult = new Información();
                                     foreach (string l in tip)
                                     {
                                         if (s < d.Count())
@@ -1334,7 +1335,6 @@ return RedirectToAction("CreaciónTabla");
                                         }
                                         q++;
                                     }
-                                    ult = new Información();
                                     s = 0;
                                     q = 0;
                                     auxiliar.Add(ult);
@@ -1343,7 +1343,110 @@ return RedirectToAction("CreaciónTabla");
                             }
                             else
                             {
-
+                                foreach (string l in datos)
+                                {
+                                    if (l == tip[r])
+                                    {
+                                        d.Add(l);
+                                        r++;
+                                    }
+                                }
+                                int s = 0;
+                                int q = 0;
+                                foreach (Información t in lista)
+                                {
+                                    if (t.num == Convert.ToInt32(datos[k + 4]))
+                                    {
+                                        ult = new Información();
+                                        foreach (string l in tip)
+                                        {
+                                            if (s < d.Count())
+                                            {
+                                                if (l == d[s])
+                                                {
+                                                    if (tip2[q] == "INT")
+                                                    {
+                                                        if (entero == 0)
+                                                        {
+                                                            ult.num = t.num;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (entero == 1)
+                                                            {
+                                                                ult.num2 = t.num2;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (entero == 2)
+                                                                {
+                                                                    ult.num3 = t.num3;
+                                                                }
+                                                            }
+                                                        }
+                                                        entero++;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (tip2[q] == "VARCHAR")
+                                                        {
+                                                            if (varchar == 0)
+                                                            {
+                                                                ult.varchar = t.varchar;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (varchar == 1)
+                                                                {
+                                                                    ult.varchar2 = t.varchar2;
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (varchar == 2)
+                                                                    {
+                                                                        ult.varchar3 = t.varchar3;
+                                                                    }
+                                                                }
+                                                            }
+                                                            varchar++;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (tip2[q] == "DATETIME")
+                                                            {
+                                                                if (tiempo == 0)
+                                                                {
+                                                                    ult.tiempo = t.tiempo;
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (tiempo == 1)
+                                                                    {
+                                                                        ult.tiempo2 = t.tiempo2;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        if (tiempo == 2)
+                                                                        {
+                                                                            ult.tiempo3 = t.tiempo3;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                tiempo++;
+                                                            }
+                                                        }
+                                                    }
+                                                    s++;
+                                                }
+                                            }
+                                            q++;
+                                        }
+                                        s = 0;
+                                        q = 0;
+                                        auxiliar.Add(ult);
+                                    }
+                                }
+                                return View(auxiliar);
                             }
                         }
                     }
