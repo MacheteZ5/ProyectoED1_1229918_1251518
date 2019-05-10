@@ -43,6 +43,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                         {
                             if (row != "\n")
                             {
+                                //introduce los valores divididos al diccionario
                                 Diccionario dicc = new Diccionario();
                                 string extra = row.Split('\n')[0];
                                 string clave = row.Split(';')[1];
@@ -114,11 +115,13 @@ namespace ProyectoED1_1229918_1251518.Controllers
             {
                 nombrestabla = new List<string>();
             }
+            //recibe la cadena de caracteres que se escribió en el cuadro de texto
             string SQL = Request.Form["SQLs"].ToString();
             char[] delimitadores = { ' ', ',', '(', ')', '\r', '"', '\n' };
             string[] separación = SQL.Split(delimitadores);
             string[] datos = new string[100];
             int i = 0;
+            //introduce los valores a un nuevo vector
             foreach (string linea in separación)
             {
                 if (linea != "")
@@ -136,8 +139,10 @@ namespace ProyectoED1_1229918_1251518.Controllers
                     break;
                 }
             }
+            //verifica si la tabla que se desea crear ya existe
             if (!repetido)
             {
+                //verifica los que los valores que contenga el vector, también los contenga el diccionario
                 if (dic.ContainsValue(datos[0]))
                 {
                     if (GetAnyValue<string>("CREATE") == datos[0])
@@ -154,6 +159,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                             {
                                 if (linea != null)
                                 {
+                                    //verifica que tipo de variables fueron las que se introdujeron
                                     if (linea == "INT" || linea == "VARCHAR" || linea == "DATETIME")
                                     {
                                         if (linea == "VARCHAR")
@@ -202,6 +208,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                             {
                                 if (!cierto)
                                 {
+                                    //si todo fue introducido de la forma correcta, crea la tabla
                                     conteo++;
                                     nombrestabla.Add(datos[2]);
                                     listadelistadetiposdevalores.Add(tiposdevalores);
@@ -264,6 +271,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                     i++;
                 }
             }
+            //verifica si la escritura que se escribió en la casilla de texto, la contiene el diccionario
             string cadena = datos[0] + " " + datos[1];
             if (GetAnyValue<string>("INSERT INTO") == cadena)
             {
@@ -278,10 +286,12 @@ namespace ProyectoED1_1229918_1251518.Controllers
                     }
                     j++;
                 }
+                //verifica si existe una tabla con el nombre que se introdujo 
                 if (verdad == true)
                 {
                     int s = 0;
                     int contador = 0;
+                    //Verifica si se desea introducir un valor nuevo a la tabla existente o si se desea crear una nueva tabla
                     if (crearnuevo == true)
                     {
                         foreach (string d in datos)
@@ -362,6 +372,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                                 int rastreoint = 0;
                                 int rastreovarchar = 0;
                                 int rastreodatetime = 0;
+                                //convierte los valores a sus respectivas variables
                                 foreach (string l in tiposdevalores)
                                 {
                                     if (l == "INT")
@@ -550,6 +561,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                                         }
                                     }
                                 }
+                                //muestra la tabla y agrega los datos al arbol
                                 nombrecolumnas = null;
                                 tiposdevalores = null;
                                 crearnuevo = false;
@@ -573,15 +585,17 @@ namespace ProyectoED1_1229918_1251518.Controllers
                     }
                     else
                     {
-                        
+                        //
                         List<Información> lista = new List<Información>();
                         List<string> nuevalistanombrecolumnas = new List<string>();
                         List<string> nuevalistadetiposdevalores = new List<string>();
                         arbolesb.BPTree<Información> auxiliar = new BPTree<Información>(4,4,3);
+                        //encuentra las estructuras que se desea utilizar
                         nuevalistanombrecolumnas = listadelistadenombrescolumnas[j];
                         nuevalistadetiposdevalores = listadelistadetiposdevalores[j];
                         auxiliar = listadearboles[j];
                         lista = listadelistas[j];
+                        //elimina los valores de sus respectivas listas debido a que al final se actualizaran todos juntos
                         listadearboles.Remove(auxiliar);
                         listadelistas.Remove(lista);
                         listadelistadenombrescolumnas.Remove(nuevalistanombrecolumnas);
@@ -664,6 +678,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                                 int rastreoint = 0;
                                 int rastreovarchar = 0;
                                 int rastreodatetime = 0;
+                                //inserta los valores al arbol y se muestra en la lista
                                 foreach (string l in nuevalistadetiposdevalores)
                                 {
                                     if (l == "INT")
@@ -888,6 +903,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
         private string ruta = AppDomain.CurrentDomain.BaseDirectory + "NuevoDiccionario.csv";
         public ActionResult CambioValor2()
         {
+            //recibe dos textos la clave y el valor que se desea cambiar
             string clave = Request.Form["clave"].ToString();
             string valor = Request.Form["valor"].ToString();
             char[] delimitadores = { ' ', '"' };
@@ -922,11 +938,13 @@ namespace ProyectoED1_1229918_1251518.Controllers
             }
             if (q == 1 && m == 1)
             {
+                //Comprueba que la clave que se escribió esté dentro del diccionario
                 if (dic.ContainsKey(clavenueva))
                 {
+                    //eliminar el valor viejo y vuelve a introducirlo al diccionario con el nuevo valor
                     dic.Remove(clavenueva);
                     dic[clavenueva] =valornuevo;
-
+                    //escribe en el nuevo diccionario los valores actualizados del diccionario (clave,valor)
                     StreamWriter writer = new StreamWriter(ruta);
                     string contenido = null;
                     foreach (KeyValuePair<string, object> k in dic)
@@ -977,6 +995,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                     i++;
                 }
             }
+            //valida que la el valor que se escribió esté dentro del diccionario
             if (dic.ContainsValue(datos[0]))
             {
                 int n = 0;
@@ -993,6 +1012,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                         n++;
                     }
                 }
+                //verifica si la variable de la clave eliminar si posea el valor que se escribió
                 if (GetAnyValue<string>("DELETE") == datos[0])
                 {
                     
@@ -1009,6 +1029,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                             {
                                 if (GetAnyValue<string>("WHERE") == datos[3])
                                 {
+                                    //método de eliminar valores deseados del árbol, por la llave primaria
                                     List<Información> inf = new List<Información>();
                                     arbolesb.BPTree<Información> nuevo = new BPTree<Información>(4,4,3);
                                     List<string> nuevalistanombrecolumnas = new List<string>();
@@ -1061,6 +1082,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                             }
                             else
                             {
+                                //método para eliminar todos los valores del árbol, sin embargo, deja las claves libres
                                 List<Información> lista = new List<Información>();
                                 arbolesb.BPTree<Información> arbolaux = new BPTree<Información>(4,4,3);
                                 List<string> nuevalistanombrecolumnas = new List<string>();
@@ -1113,13 +1135,13 @@ namespace ProyectoED1_1229918_1251518.Controllers
                 {
                     if (GetAnyValue<string>("DROP") == datos[0])
                     {
+                        //eliminar la estructura completa, elimina el árbol completo como si nunca hubiera existido
                         listadelistas.Remove(listadelistas[n]);
                         listadearboles.Remove(listadearboles[n]);
                         nombrestabla.Remove(nombrestabla[n]);
                         listadelistadenombrescolumnas.Remove(listadelistadenombrescolumnas[n]);
                         listadelistadetiposdevalores.Remove(listadelistadetiposdevalores[n]);
-                        
-return RedirectToAction("CreaciónTabla");
+                        return RedirectToAction("CreaciónTabla");
                     }
                     else
                     {
@@ -1464,7 +1486,6 @@ return RedirectToAction("CreaciónTabla");
             {
                 return RedirectToAction("Busqueda");
             }
-            return View();
         }
     }
 }
