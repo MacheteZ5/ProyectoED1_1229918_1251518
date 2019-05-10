@@ -16,6 +16,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
             return View();
         }
         static Dictionary<string, object> dic = new Dictionary<string, object>();
+        static int conteo = 0;
         [HttpPost]
         public ActionResult Index(HttpPostedFileBase postedFile)
         {
@@ -201,6 +202,7 @@ namespace ProyectoED1_1229918_1251518.Controllers
                             {
                                 if (!cierto)
                                 {
+                                    conteo++;
                                     nombrestabla.Add(datos[2]);
                                     listadelistadetiposdevalores.Add(tiposdevalores);
                                     listadelistadenombrescolumnas.Add(nombrecolumnas);
@@ -237,7 +239,14 @@ namespace ProyectoED1_1229918_1251518.Controllers
         //Aquí se incertarán los valores a las tablas
         public ActionResult InserciónDatos()
         {
-            return View();
+            if (conteo == 0)
+            {
+                return RedirectToAction("Menú");
+            }
+            else
+            {
+                return View();
+            }
         }
         public ActionResult InserciónDatos2()
         {
@@ -554,17 +563,17 @@ namespace ProyectoED1_1229918_1251518.Controllers
                             }
                             else
                             {
-                                return View("InserciónDatos2");
+                                return View("InserciónDatos");
                             }
                         }
                         else
                         {
-                            return View("InserciónDatos2");
+                            return View("InserciónDatos");
                         }
                     }
                     else
                     {
-                        //corregir esto
+                        
                         List<Información> lista = new List<Información>();
                         List<string> nuevalistanombrecolumnas = new List<string>();
                         List<string> nuevalistadetiposdevalores = new List<string>();
@@ -851,23 +860,23 @@ namespace ProyectoED1_1229918_1251518.Controllers
                             }
                             else
                             {
-                                return View("InserciónDatos2");
+                                return View("InserciónDatos");
                             }
                         }
                         else
                         {
-                            return View("InserciónDatos2");
+                            return View("InserciónDatos");
                         }
                     }
                 }
                 else
                 {
-                    return View("InserciónDatos2");
+                    return View("InserciónDatos");
                 }
             }
             else
             {
-                return View("InserciónDatos2");
+                return View("InserciónDatos");
             }
         }
 
@@ -944,7 +953,14 @@ namespace ProyectoED1_1229918_1251518.Controllers
         //Metodo de eliminación del árbol
         public ActionResult Eliminación()
         {
-            return View();
+            if (conteo == 0)
+            {
+                return RedirectToAction("Menú");
+            }
+            else
+            {
+                return View();
+            }
         }
         public ActionResult Eliminación2()
         {
@@ -963,22 +979,23 @@ namespace ProyectoED1_1229918_1251518.Controllers
             }
             if (dic.ContainsValue(datos[0]))
             {
+                int n = 0;
+                bool nombreencontrado = false;
+                foreach (string l in nombrestabla)
+                {
+                    if (datos[2] == l)
+                    {
+                        nombreencontrado = true;
+                        break;
+                    }
+                    else
+                    {
+                        n++;
+                    }
+                }
                 if (GetAnyValue<string>("DELETE") == datos[0])
                 {
-                    int n = 0;
-                    bool nombreencontrado = false;
-                    foreach (string l in nombrestabla)
-                    {
-                        if (datos[2] == l)
-                        {
-                            nombreencontrado = true;
-                            break;
-                        }
-                        else
-                        {
-                            n++;
-                        }
-                    }
+                    
                     if (nombreencontrado)
                     {
                         int c = 0;
@@ -994,39 +1011,48 @@ namespace ProyectoED1_1229918_1251518.Controllers
                                 {
                                     List<Información> inf = new List<Información>();
                                     arbolesb.BPTree<Información> nuevo = new BPTree<Información>(4,4,3);
-                                    int k = 0;
-                                    foreach (List<Información> info in listadelistas)
+                                    List<string> nuevalistanombrecolumnas = new List<string>();
+                                    List<string> nuevalistadetiposdevalores = new List<string>();
+                                    nuevalistanombrecolumnas = listadelistadenombrescolumnas[n];
+                                    nuevalistadetiposdevalores = listadelistadetiposdevalores[n];
+                                    inf = listadelistas[n];
+                                    nuevo = listadearboles[n];
+                                    //eliminar los elementos de sus respectivas listas con el fin de actualizarlas y que todos los datos se encuentren en la misma posición
+                                    listadelistas.Remove(inf);
+                                    listadearboles.Remove(nuevo);
+                                    listadelistadetiposdevalores.Remove(nuevalistadetiposdevalores);
+                                    listadelistadenombrescolumnas.Remove(nuevalistanombrecolumnas);
+                                    nombrestabla.Remove(datos[2]);
+                                    Información x = new Información();
+                                    int repetidos = 0;
+                                    foreach(Información p in inf)
                                     {
-                                        if (k == n)
+                                        if (p.num == Convert.ToInt32(datos[5]))
                                         {
-                                            inf = info;
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            k++;
-                                        }
-                                    }
-                                    k = 0;
-                                    foreach (arbolesb.BPTree<Información> a in listadearboles)
-                                    {
-                                        if (k == n)
-                                        {
-                                           nuevo = a;
-                                           break;
-                                        }
-                                        else
-                                        {
-                                            k++;
+                                            nuevo.delete(p);
+                                            x = p;
+                                            repetidos++;
                                         }
                                     }
                                     
-                                    Información inv = new Información();
-                                    arbolesb.Node<Información> p = new Node<Información>(4,true);
-                                    inv.num = Convert.ToInt32(datos[5]);
-                                    p=nuevo.search(inv);
-                                    inv = p.getKeys()[0];
-                                    nuevo.delete(inv);
+                                    if (repetidos > 0)
+                                    {
+                                        for(int t = 0; t < repetidos; t++)
+                                        {
+                                            inf.Remove(x);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        inf.Remove(x);
+                                    }
+                                    //Volver a insertar todos los valores y estructuras a sus respectivas listas para que se encuentren de forma ordenada
+                                    listadelistadetiposdevalores.Add(nuevalistadetiposdevalores);
+                                    listadelistadenombrescolumnas.Add(nuevalistanombrecolumnas);
+                                    nombrestabla.Add(datos[2]);
+                                    listadearboles.Add(nuevo);
+                                    listadelistas.Add(inf);
+                                    return View("Menú");
                                 }
                                 else
                                 {
@@ -1035,7 +1061,42 @@ namespace ProyectoED1_1229918_1251518.Controllers
                             }
                             else
                             {
+                                List<Información> lista = new List<Información>();
+                                arbolesb.BPTree<Información> arbolaux = new BPTree<Información>(4,4,3);
+                                List<string> nuevalistanombrecolumnas = new List<string>();
+                                List<string> nuevalistadetiposdevalores = new List<string>();
 
+                                //encontrar los valores 
+                                nuevalistanombrecolumnas = listadelistadenombrescolumnas[n];
+                                nuevalistadetiposdevalores = listadelistadetiposdevalores[n];
+                                lista = listadelistas[n];
+                                arbolaux = listadearboles[n];
+                                //eliminar 
+                                listadelistadetiposdevalores.Remove(nuevalistadetiposdevalores);
+                                listadelistadenombrescolumnas.Remove(nuevalistanombrecolumnas);
+                                listadelistas.Remove(lista);
+                                listadearboles.Remove(arbolaux);
+                                nombrestabla.Remove(datos[2]);
+                                int p = 0;
+                                Información infos = new Información();
+                                foreach(Información info in lista)
+                                {
+                                    arbolaux.delete(info);
+                                    p++;
+                                }
+                                
+                                for(int j = 0; j < p; j++)
+                                {
+                                    infos=lista[0];
+                                    lista.Remove(infos);
+                                }
+                                //Introducir los valores nuevamente, actualizar la información
+                                listadelistadetiposdevalores.Add(nuevalistadetiposdevalores);
+                                listadelistadenombrescolumnas.Add(nuevalistanombrecolumnas);
+                                nombrestabla.Add(datos[2]);
+                                listadearboles.Add(arbolaux);
+                                listadelistas.Add(lista);
+                                return RedirectToAction("InserciónDatos");
                             }
                         }
                         else
@@ -1050,15 +1111,257 @@ namespace ProyectoED1_1229918_1251518.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("Eliminación");
+                    if (GetAnyValue<string>("DROP") == datos[0])
+                    {
+                        listadelistas.Remove(listadelistas[n]);
+                        listadearboles.Remove(listadearboles[n]);
+                        nombrestabla.Remove(nombrestabla[n]);
+                        listadelistadenombrescolumnas.Remove(listadelistadenombrescolumnas[n]);
+                        listadelistadetiposdevalores.Remove(listadelistadetiposdevalores[n]);
+                        
+return RedirectToAction("CreaciónTabla");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Eliminación");
+                    }
                 }
             }
             else
             {
                 return RedirectToAction("Eliminación");
             }
+        }
 
-           return View();
+        //Método busqueda
+        public ActionResult Busqueda()
+        {
+            return View();
+        }
+        public ActionResult Busqueda2()
+        {
+            string insertar = Request.Form["buscar"].ToString();
+            char[] delimitadores = { ' ', ',', '(', ')', '\r', '"', '\n', '=' };
+            string[] separación = insertar.Split(delimitadores);
+            List<string> datos = new List<string>();
+            int i = 0;
+            foreach (string k in separación)
+            {
+                if (k != "")
+                {
+                    datos.Add(k);
+                    i++;
+                }
+            }
+            if(GetAnyValue<string>("SELECT") == datos[0])
+            {
+                bool co = false;
+                int k = 0;
+                foreach (string l in datos)
+                {
+                    if (GetAnyValue<string>("FROM") == l)
+                    {
+                        co = true;
+                        break;
+                    }
+                    else
+                    {
+                        k++;
+                    }
+                }
+                if (co == true)
+                {
+                    int b = 0;
+                    bool existetabla = false;
+                    foreach(string nombre in nombrestabla)
+                    {
+                        if (datos[k + 1] == nombre)
+                        {
+                            existetabla = true;
+                            break;
+                        }
+                        else
+                        {
+                            b++;
+                        }
+                    }
+                    if (existetabla)
+                    {
+                        List<Información> lista = new List<Información>();
+                        lista = listadelistas[b];
+                        arbolesb.BPTree<Información> arbolauxiliar = new BPTree<Información>(4,4,3);
+                        arbolauxiliar=listadearboles[b];
+                        List<Información> aux = new List<Información>();
+                        arbolesb.Node<Información> arb = new Node<Información>(4,true);
+                        Información num = new Información();
+                        num.num = 1;
+                        arb=arbolauxiliar.search(num);
+                        aux=arb.getKeys();
+                        if (datos[1] == "*")
+                        {
+                            if (datos.Count()==4)
+                            {
+                                return View(lista);
+                            }
+                            else
+                            {
+                                if (GetAnyValue<string>("WHERE") == datos[k + 2])
+                                {
+                                    List<Información> auxi = new List<Información>();
+                                    foreach(Información info in lista)
+                                    {
+                                        if (info.num == Convert.ToInt32(datos[k + 4]))
+                                        {
+                                            auxi.Add(info);
+                                        }
+                                    }
+                                    return View(auxi);
+                                }
+                                else
+                                {
+                                    return RedirectToAction("Busqueda");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Información ult = new Información();
+                            List<Información> auxiliar = new List<Información>();
+                            List<string> tip = new List<string>();
+                            List<string> tip2 = new List<string>();
+                            tip = listadelistadenombrescolumnas[b];
+                            tip2 = listadelistadetiposdevalores[b];
+                            List<string> d = new List<string>();
+                            
+                            int r = 0;
+                            int varchar = 0;
+                            int entero = 0;
+                            int tiempo = 0;
+                            if (!datos.Contains("WHERE"))
+                            {
+                                foreach(string l in datos)
+                                {
+                                    if (l == tip[r])
+                                    {
+                                        d.Add(l);
+                                        r++;
+                                    }
+                                }
+                                int s = 0;
+                                int q = 0;
+                                foreach(Información t in lista)
+                                {
+                                    foreach (string l in tip)
+                                    {
+                                        if (s < d.Count())
+                                        {
+                                            if (l == d[s])
+                                            {
+                                                if (tip2[q] == "INT")
+                                                {
+                                                    if (entero == 0)
+                                                    {
+                                                        ult.num = t.num;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (entero == 1)
+                                                        {
+                                                            ult.num2 = t.num2;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (entero == 2)
+                                                            {
+                                                                ult.num3 = t.num3;
+                                                            }
+                                                        }
+                                                    }
+                                                    entero++;
+                                                }
+                                                else
+                                                {
+                                                    if (tip2[q] == "VARCHAR")
+                                                    {
+                                                        if (varchar == 0)
+                                                        {
+                                                            ult.varchar = t.varchar;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (varchar == 1)
+                                                            {
+                                                                ult.varchar2 = t.varchar2;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (varchar == 2)
+                                                                {
+                                                                    ult.varchar3 = t.varchar3;
+                                                                }
+                                                            }
+                                                        }
+                                                        varchar++;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (tip2[q] == "DATETIME")
+                                                        {
+                                                            if (tiempo == 0)
+                                                            {
+                                                                ult.tiempo = t.tiempo;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (tiempo == 1)
+                                                                {
+                                                                    ult.tiempo2 = t.tiempo2;
+                                                                }
+                                                                else
+                                                                {
+                                                                    if (tiempo == 2)
+                                                                    {
+                                                                        ult.tiempo3 = t.tiempo3;
+                                                                    }
+                                                                }
+                                                            }
+                                                            tiempo++;
+                                                        }
+                                                    }
+                                                }
+                                                s++;
+                                            }
+                                        }
+                                        q++;
+                                    }
+                                    ult = new Información();
+                                    s = 0;
+                                    q = 0;
+                                    auxiliar.Add(ult);
+                                }
+                                return View(auxiliar);
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToAction("Busqueda");
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Busqueda");
+                }
+            }
+            else
+            {
+                return RedirectToAction("Busqueda");
+            }
+            return View();
         }
     }
 }

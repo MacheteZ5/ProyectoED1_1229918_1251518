@@ -80,10 +80,10 @@ C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\Proyecto
 C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\bin\es\System.Web.WebPages.resources.dll
 C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\bin\es\System.Web.WebPages.Deployment.resources.dll
 C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\bin\es\System.Web.WebPages.Razor.resources.dll
-C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\obj\Debug\ProyectoED1_1229918_1251518.csprojAssemblyReference.cache
 C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\obj\Debug\ProyectoED1_1229918_1251518.csproj.CoreCompileInputs.cache
 C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\obj\Debug\ProyectoED1_1229918_1251518.csproj.CopyComplete
 C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\obj\Debug\ProyectoED1_1229918_1251518.dll
 C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\obj\Debug\ProyectoED1_1229918_1251518.pdb
 C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\bin\arbolesb.dll
 C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\bin\arbolesb.pdb
+C:\Users\mache\Documents\Segundo año\Primer Ciclo\ProyectoFinal\ultimo\ProyectoED1_1229918_1251518\ProyectoED1_1229918_1251518\obj\Debug\ProyectoED1_1229918_1251518.csprojAssemblyReference.cache

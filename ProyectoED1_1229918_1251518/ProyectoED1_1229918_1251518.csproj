@@ -181,6 +181,8 @@
     <Content Include="Views\MiSQL\InserciónDatos.cshtml" />
     <Content Include="Views\MiSQL\InserciónDatos2.cshtml" />
     <Content Include="Views\MiSQL\Eliminación.cshtml" />
+    <Content Include="Views\MiSQL\Busqueda.cshtml" />
+    <Content Include="Views\MiSQL\Busqueda2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
